@@ -132,10 +132,8 @@ class Alert extends \yii\bootstrap\Alert
         AlertAsset::register($view);
 
         if ($this->delay > 0) {
-            $js = 'jQuery("#' . $this->options['id'] . '").fadeTo(' . $this->delay . ', 0.00, function() {
-				$(this).slideUp("slow", function() {
-					$(this).remove();
-				});
+            $js = 'jQuery("#' . $this->options['id'] . '").slideUp(' . $this->delay . ', function() {
+				$(this).remove();
 			});';
             $view->registerJs($js);
         }
