@@ -73,6 +73,7 @@ class Alert extends \yii\bootstrap\Alert
      * Will be useful when multiple alerts are to be shown.
      */
     public $delay;
+    public $speed;
 
     /**
      * Runs the widget
@@ -132,9 +133,11 @@ class Alert extends \yii\bootstrap\Alert
         AlertAsset::register($view);
 
         if ($this->delay > 0) {
-            $js = 'jQuery("#' . $this->options['id'] . '").slideUp(' . $this->delay . ', function() {
-				$(this).remove();
-			});';
+            $js = 'setTimeout(function(){
+	    	jQuery("#' . $this->options['id'] . '").slideUp(' . $this->speed . ', function() {
+			$(this).remove();
+		});
+	    }, ' . $this->delay . ')';
             $view->registerJs($js);
         }
     }
